@@ -44,8 +44,27 @@ void VisualizarSerie()
         WriteLine("Nenhuma série cadastrada");
         return;
     }
-    WriteLine("Digite o id da série.");
-    int indiceSerie = int.Parse(ReadLine());
+    int indiceSerie;
+    do
+    {
+        try
+        {
+            WriteLine("Digite o id da série.");
+            indiceSerie = int.Parse(ReadLine());
+        }
+        catch (System.Exception)
+        {
+            WriteLine("ID da série não encontrado.");
+            indiceSerie = -1;
+
+        }
+        if (indiceSerie > lista.Count - 1)
+        {
+            indiceSerie = -1;
+            WriteLine("ID da série não encontrado.");
+        }
+
+    } while (indiceSerie <= -1);
 
     var serie = repositorio.RetornaPorId(indiceSerie);
     WriteLine(serie);
@@ -121,14 +140,45 @@ void InserirSerie()
         index++;
     }
 
-    WriteLine("Digite o numero referente ao gênero listado acima.");
-    int entradaGenero = int.Parse(ReadLine());
-  
+
+    int entradaGenero;
+
+    do
+    {
+        try
+        {
+            WriteLine("Digite o numero referente ao gênero listado acima.");
+            entradaGenero = int.Parse(ReadLine());
+        }
+        catch (System.Exception)
+        {
+            WriteLine("Comando inválido.");
+            entradaGenero = 0;
+
+        }
+
+    } while (entradaGenero > 13 || entradaGenero < 1);
+
     WriteLine("Digite o Título da Série.");
     string entradaTitulo = ReadLine();
 
-    WriteLine("Informe o ano de lançamento da série.");
-    int entradaAno = int.Parse(ReadLine());
+
+    int entradaAno;
+    do
+    {
+        try
+        {
+            WriteLine("Informe o ano de lançamento da série.");
+            entradaAno = int.Parse(ReadLine());
+        }
+        catch (System.Exception)
+        {
+            WriteLine("Ano inválido.");
+            entradaAno = 0;
+
+        }
+
+    } while (entradaAno <= 0);
 
     WriteLine("Digite a Descrição da Série.");
     string entradaDescricao = ReadLine();
